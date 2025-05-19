@@ -2,9 +2,11 @@
 
 Simulação de um sistema IoT para monitoramento de vagas de motos usando ESP32, sensor ultrassônico HC-SR04 e LED. Projetado como uma solução para empresas como a **Mottu**, que precisam controlar a ocupação e manutenção das motos em tempo real.
 
+---
+
 ## Objetivo
 
-Detectar automaticamente a ocupação de uma vaga por meio de um sensor de distância e indicar manutenção por LED, enviando os dados via **MQTT** para integração com dashboards.
+Detectar automaticamente a ocupação de uma vaga por meio de um sensor de distância e indicar manutenção por LED, enviando os dados via **MQTT** para integração com dashboards em tempo real.
 
 ---
 
@@ -14,33 +16,57 @@ Detectar automaticamente a ocupação de uma vaga por meio de um sensor de dist�
 - Sensor Ultrassônico HC-SR04
 - LED + resistor de 220Ω
 - Wokwi (simulação online)
+- Node-RED (dashboard)
 - Protocolo MQTT (broker: `broker.hivemq.com`)
 - Arduino (linguagem C++)
-- WiFi.h / PubSubClient.h
+- Bibliotecas: `WiFi.h`, `PubSubClient.h`
 
 ---
 
-##  Funcionamento
+## Funcionamento
 
-- Se a distância < 20cm → vaga ocupada → LED vermelho acende → mensagem enviada via MQTT
-- Se a distância >= 20cm → vaga livre → LED apaga → outra mensagem via MQTT
+- Se a distância < 20cm → vaga **ocupada** → LED vermelho acende → mensagem `{"vagaA": "ocupada"}` enviada via MQTT
+- Se a distância ≥ 20cm → vaga **livre** → LED apaga → mensagem `{"vagaA": "livre"}` enviada
 
-### Exemplo da mensagem enviada:
-```json
-{"vagaA": "ocupada"}
-```
+---
 
-## Link da simulação no Wokwi
-https://wokwi.com/projects/431339679872230401
+## Simulação no Wokwi
 
-## Como rodar o projeto
-1. Abra o projeto no Wokwi
-2. Clique no botão “Start the simulation”
-3. Mude a régua do sensor para simular entrada/saída da moto
-4. Observe o LED e o monitor serial (dados MQTT enviados)
+🔗 [Clique aqui para abrir a simulação](https://wokwi.com/projects/431339679872230401)
+
+### Como testar:
+
+1. Acesse o link acima
+2. Clique em **"Start the simulation"**
+3. Mova a régua do sensor com o mouse
+4. Observe o LED acendendo/apagando
+5. Veja os dados no **Monitor Serial**
+
+---
+
+## Dashboard Node-RED
+
+Criamos um painel para exibir em tempo real o status da vaga com base nas mensagens MQTT.
+
+### Requisitos:
+- Node-RED instalado
+- Paleta: `node-red-dashboard` (instale via "Manage Palette")
+
+### Como importar o fluxo:
+1. Acesse: `http://localhost:1880`
+2. Clique no menu (☰) > **Import**
+3. Cole [este JSON do fluxo](./flow-node-red.json) 
+4. Clique em **Deploy**
+5. Acesse o painel em: `http://localhost:1880/ui`
+
+Você verá:
+- Status da Vaga: livre / ocupada
+
+---
 
 ## Vídeo Pitch
 
+---
 
 ## Nossos integrantes
 - **Gustavo Camargo de Andrade**
