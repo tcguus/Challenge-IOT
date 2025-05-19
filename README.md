@@ -1,7 +1,4 @@
 # Challenge-IOT
-Simulação IoT de monitoramento de vagas para motos usando ESP32, sensor ultrassônico e MQTT.
-
-# Smart Mottu Parking Monitor
 
 Simulação de um sistema IoT para monitoramento de vagas de motos usando ESP32, sensor ultrassônico HC-SR04 e LED. Projetado como uma solução para empresas como a **Mottu**, que precisam controlar a ocupação e manutenção das motos em tempo real.
 
