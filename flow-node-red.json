@@ -1,0 +1,101 @@
+[
+  {
+    "id": "mqtt_in",
+    "type": "mqtt in",
+    "z": "flow1",
+    "name": "Recebe status da vaga",
+    "topic": "mottu/patio",
+    "broker": "mqtt_broker",
+    "x": 120,
+    "y": 100,
+    "wires": [
+      [
+        "json_parse"
+      ]
+    ]
+  },
+  {
+    "id": "json_parse",
+    "type": "json",
+    "z": "flow1",
+    "name": "Converter JSON",
+    "property": "payload",
+    "action": "",
+    "pretty": false,
+    "x": 330,
+    "y": 100,
+    "wires": [
+      [
+        "extract_status"
+      ]
+    ]
+  },
+  {
+    "id": "extract_status",
+    "type": "function",
+    "z": "flow1",
+    "name": "Extrair status",
+    "func": "msg.payload = msg.payload.vagaA;\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 530,
+    "y": 100,
+    "wires": [
+      [
+        "text_status"
+      ]
+    ]
+  },
+  {
+    "id": "text_status",
+    "type": "ui_text",
+    "z": "flow1",
+    "group": "grupo_dashboard",
+    "order": 1,
+    "width": 6,
+    "height": 2,
+    "name": "Texto Status",
+    "label": "Status da Vaga",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "x": 750,
+    "y": 100,
+    "wires": []
+  },
+  {
+    "id": "mqtt_broker",
+    "type": "mqtt-broker",
+    "name": "HiveMQ Broker",
+    "broker": "broker.hivemq.com",
+    "port": "1883",
+    "clientid": "",
+    "usetls": false,
+    "keepalive": "60",
+    "cleansession": true,
+    "birthTopic": "",
+    "birthQos": "0",
+    "birthPayload": "",
+    "closeTopic": "",
+    "closePayload": "",
+    "willTopic": "",
+    "willQos": "0",
+    "willPayload": ""
+  },
+  {
+    "id": "grupo_dashboard",
+    "type": "ui_group",
+    "name": "Monitoramento",
+    "tab": "aba_dashboard",
+    "order": 1,
+    "disp": true,
+    "width": "6",
+    "collapse": false
+  },
+  {
+    "id": "aba_dashboard",
+    "type": "ui_tab",
+    "name": "Smart Parking",
+    "icon": "dashboard",
+    "order": 1
+  }
+]
