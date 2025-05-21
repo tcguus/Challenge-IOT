@@ -65,6 +65,7 @@ Você verá:
 ---
 
 ## Vídeo Pitch
+[Assitir no YouTube](https://youtu.be/WvZojYpMwJ4)
 
 ---
 
